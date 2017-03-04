@@ -7,7 +7,7 @@ http.createServer(function (req, res) {
 	if (req.url === '/') {
 		res.writeHead(200, {"Content-Type" : "text-html"});
 		var html = fs.readFileSync(__dirname + "/index.html");
-		res.end(html);
+		res.end("<html><head></head><body><h1>New Line</h1></body></html>");
 	}
 	if (req.url === '/api') {
 		res.writeHead(200, {"Content-Type" : "application/json"});
