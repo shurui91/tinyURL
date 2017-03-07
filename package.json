@@ -1,0 +1,23 @@
+{
+  "name": "full-stack-tinyurl",
+  "version": "1.0.0",
+  "description": "a fullstack project that handles at least 10k of URL processing request per second.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shurui91/tinyURL.git"
+  },
+  "author": "Shurui Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shurui91/tinyURL/issues"
+  },
+  "homepage": "https://github.com/shurui91/tinyURL#readme",
+  "dependencies": {
+    "express": "^4.15.0"
+  }
+}
