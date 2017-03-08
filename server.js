@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 app.longToShortHash = {};
 app.shortToLongHash = {};
 
+app.use('/public', express.static(__dirname + '/public'));
+
 app.use('/api/v1', apiRouter);
 
 // comma means shortUrl is a variable name
