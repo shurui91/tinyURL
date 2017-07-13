@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/shurui91/tinyURL#readme",
   "dependencies": {
-    "express": "^4.15.0"
-  }
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {}
 }
