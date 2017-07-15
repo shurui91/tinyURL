@@ -1,8 +1,11 @@
 var express = require('express');
 var app = express();
+var apiRouter = require('./routes/api');
+var redirectRouter = require('./routes/redirect');
 
-app.get('/', function (req, res) {
-	res.send("express 1st time");
-});
+app.longToShortHash = {};
+app.shortToLongHash = {};
 
+app.use('api/v1', restRouter);
+app.use('/:shortUrl', redirectRouter);
 app.listen(3000);
