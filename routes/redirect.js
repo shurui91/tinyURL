@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var urlService = require('../service/urlService');
+var urlService = require('../services/urlService');
 
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
