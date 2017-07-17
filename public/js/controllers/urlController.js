@@ -7,5 +7,5 @@ app.controller('urlController',
 				$scope.shortUrl = data.shortUrl;
 				$scope.longUrl = data.longUrls;
 				$scope.shortUrlToShow = "http://localhost:3000/" + data.shortUrl;
-			})
+			});
 	}]);

@@ -3,7 +3,7 @@ var app = express();
 var apiRouter = require('./routes/api');
 var redirectRouter = require('./routes/redirect');
 var indexRouter = require('./routes/index');
-var restRouter = require('./routes/redirect');
+var restRouter = require('./routes/rest');
 
 app.longToShortHash = {};
 app.shortToLongHash = {};
