@@ -2,14 +2,16 @@ var express = require('express');
 var router = express.Router();
 var urlService = require('../services/urlService');
 
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-
 router.get('*', function(req, res) {
 	// slice(1) removes the starting slash
 	var shortUrl = req.originalUrl.slice(1);
-	var longUrl = urlService.getLongUrl(shortUrl, req.app.shortToLongHash);
-	res.redirect(longUrl);
+	urlService.getLongUrl(shortUrl, function() {
+		if (url) {
+			res.redirect(url.longUrl);
+		} else {
+			res.sendFile(path.join(__dirname, '../public/views', '404.html'));
+		}
+	});
 });
 
 module.exports = router;

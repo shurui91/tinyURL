@@ -1,5 +1,7 @@
+var urlModel = require('../models/urlModel');
+
 var encode = [];
-var genCharArray = function (charA, charZ) {
+var genCharArray = function(charA, charZ) {
 	var arr = [];
 	var i = charA.charCodeAt(0);
 	var j = charZ.charCodeAt(0);
@@ -14,38 +16,50 @@ encode = encode.concat(genCharArray('0', '9'));
 encode = encode.concat(genCharArray('a', 'z'));
 encode = encode.concat(genCharArray('A', 'Z'));
 
-var getShortUrl = function (longUrl, longToShortHash, shortToLongHash) {
+var getShortUrl = function(longUrl, callback) {
 	// 补全
 	if (longUrl.indexOf('http') === -1) {
-		longUrl = "http://" + longUrl;
+		longUrl = 'http://' + longUrl;
 	}
-	// 若已经生成过shortUrl 就不再重复做一次
-	if (longToShortHash[longUrl] != null) {
-		return longToShortHash[longUrl];
-	}
-	else {
-		var shortUrl = generateShortUrl(longToShortHash);
-		longToShortHash[longUrl] = shortUrl;
-		shortToLongHash[shortUrl] = longUrl;
-		return shortUrl;
-	}
+
+	UrlModel.findOne({ longUrl: longUrl }, function(err, url) {
+		if (url) {
+			// read from database
+			callback(url);
+		} else {
+			// write to database
+			generateShortUrl(function(shortUrl) {
+				var url = new UrlModel({
+					shortUrl: shortUrl,
+					longUrl: longUrl
+				});
+				url.save();
+				// remember to also return this
+				callback(url);
+			});
+		}
+	});
 };
 
-var generateShortUrl = function (longToShortHash) {
-	return convertTo62(Object.keys(longToShortHash).length);
+var generateShortUrl = function(longToShortHash) {
+	UrlModel.find({}, function(err, urls) {
+		callback(convertTo62(urls.length));
+	});
 };
 
-var convertTo62 = function (num) {
+var convertTo62 = function(num) {
 	var result = '';
 	do {
 		result = encode[num % 62] * result;
 		num = Math.floor(num / 62);
 	} while (num);
 	return result;
-}
+};
 
-var getLongUrl = function (shortUrl, shortToLongHash) {
-	return shortToLongHash[shortUrl];
+var getLongUrl = function(shortUrl, callback) {
+	UrlModel.findOne({ shortUrl: shortUrl }, function(err, url) {
+		callback(url);
+	});
 };
 
 module.exports = {
