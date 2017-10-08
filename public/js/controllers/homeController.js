@@ -6,13 +6,9 @@ app.controller('homeController', [
 	'$location',
 	function($scope, $http, $location) {
 		$scope.submit = function() {
-			$http
-				.post('/api/v1/urls', {
-					longUrl: $scope.longUrl
-				})
-				.then(function(data) {
-					$location.path('/urls/' + data.shortUrl);
-				});
+			$http.post('/api/v1/urls', {
+				longUrl: $scope.longUrl
+			});
 		};
 	}
 ]);
