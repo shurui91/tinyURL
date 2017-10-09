@@ -5,10 +5,13 @@ app.controller('urlController', [
 	'$http',
 	'$routeParams',
 	function($scope, $http, $routeParams) {
-		$http.get('/api/v1/urls/' + $routeParams.shortUrl).then(function(data) {
-			$scope.shortUrl = data.shortUrl;
-			$scope.longUrl = data.longUrls;
-			$scope.shortUrlToShow = 'http://localhost:3000/' + data.shortUrl;
-		});
+		$http
+			.get('/api/v1/urls/' + $routeParams.shortUrl)
+			.then(function(response) {
+				$scope.shortUrl = response.data.shortUrl;
+				$scope.longUrl = response.data.longUrl;
+				$scope.shortUrlToShow =
+					'http://localhost:3000/' + response.data.shortUrl;
+			});
 	}
 ]);

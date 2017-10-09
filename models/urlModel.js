@@ -8,4 +8,4 @@ var UrlSchema = new Schema({
 
 var urlModel = mongoose.model('urlModel', UrlSchema);
 
-module.exports - urlModel;
+module.exports = urlModel;

@@ -13,10 +13,12 @@ app.shortToLongHash = {};
 
 app.use('/public', express.static(__dirname + '/public'));
 
+// deal with all the links should be sent to the backend
 app.use('/api/v1', restRouter);
 
 app.use('/', indexRouter);
 
+// column means whatever comes after is a variable
 app.use('/:shortUrl', redirectRouter);
 
 app.listen(3000);
