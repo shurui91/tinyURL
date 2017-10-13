@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:6.3.1
 
 RUN npm install nodemon -g
 
@@ -12,4 +12,4 @@ RUN cd /app && npm install
 
 EXPOSE 3000
 
-CMD ['node', '/app/server.js']
+CMD ["node", "/app/server.js"]
