@@ -14,7 +14,10 @@ A full-stack project that handles at least 10k of URL processing request per sec
 * To run your docker image, ```docker run --name tinyurl -p 3000:3000 -d xxx/tinyurl```
     * If your port 3000 is not available (most likely because of NodeJS is still running), run ```killall -9 node```
 
-## Some other useful commands
+## Some other Docker commands
 * ```docker images```
 * ```docker rm xxxxxx```, remove a specific container by ID
 * ```docker ps -a```, to show all the containers
+
+## To upload a Docker image to nginx
+* ```docker-compose up --build```
