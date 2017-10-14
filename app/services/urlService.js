@@ -1,4 +1,9 @@
 var UrlModel = require('../models/urlModel');
+var redis = require('redis');
+var host = process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1';
+var port = process.env.REDIS_PORT_6379_TCP_ADDR || '6379';
+
+var redisClient = redis.createClient(port, host);
 
 var encode = [];
 
@@ -23,20 +28,31 @@ var getShortUrl = function(longUrl, callback) {
 		longUrl = 'http://' + longUrl;
 	}
 
-	UrlModel.findOne({ longUrl: longUrl }, function(err, url) {
-		if (url) {
-			callback(url);
-		} else {
-			generateShortUrl(function(shortUrl) {
-				var url = new UrlModel({
-					shortUrl: shortUrl,
-					longUrl: longUrl
-				});
-				url.save();
-				callback(url);
+	redisClient.get(longUrl, function(err, shortUrl)) {
+		if (shortUrl) {
+			callback({
+				longUrl: longUrl,
+				shortUrl: shortUrl
 			});
 		}
-	});
+
+		UrlModel.findOne({ longUrl: longUrl }, function(err, url) {
+			if (url) {
+				callback(url);
+			} else {
+				generateShortUrl(function(shortUrl) {
+					var url = new UrlModel({
+						shortUrl: shortUrl,
+						longUrl: longUrl
+					});
+					url.save();
+					redisClient.set(shortUrl, longUrl);
+					redisClient.set(longUrl, shortUrl);
+					callback(url);
+				});
+			}
+		});
+	}
 
 	// make the shortUrl if it never exists
 	/*
@@ -67,8 +83,18 @@ var convertTo62 = function(num) {
 };
 
 var getLongUrl = function(shortUrl, callback) {
-	UrlModel.findOne({ shortUrl: shortUrl }, function(err, url) {
-		callback(url);
+	redisClient.get(shortUrl, function(err, longUrl) {
+		if (longUrl) {
+			callback({
+				longUrl: longUrl,
+				shortUrl: shortUrl
+			});
+		}
+		else {
+			UrlModel.findOne({ shortUrl: shortUrl }, function(err, url) {
+				callback(url);
+			});
+		}
 	});
 };
 
