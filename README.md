@@ -3,7 +3,7 @@ A full-stack project that handles at least 10k of URL processing request per sec
 
 ## How to use
 ### How to use locally
-* Fork or download the zip file; after unzipping, get into the folder, then do
+* Fork or download the zip file; after unzipping, get into the ```app``` folder, then do
     * ```npm install```
     * ```nodemon server.js```
 * Then check out the project at ```localhost:3000```
