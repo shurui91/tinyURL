@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var urlService = require('../services/urlService');
+var path = require('path');
 
 router.get('*', function(req, res) {
 	// slice(1) removes the starting slash
