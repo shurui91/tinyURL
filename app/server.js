@@ -5,6 +5,7 @@ var redirectRouter = require('./routes/redirect');
 var indexRouter = require('./routes/index');
 var restRouter = require('./routes/rest');
 var mongoose = require('mongoose');
+var useragent = require('express-useragent');
 
 mongoose.connect('mongodb://user:user@ds125060.mlab.com:25060/tinyurl');
 
