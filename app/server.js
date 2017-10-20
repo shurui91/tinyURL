@@ -14,6 +14,8 @@ mongoose.connect('mongodb://user:user@ds125060.mlab.com:25060/tinyurl');
 
 app.use('/public', express.static(__dirname + '/public'));
 
+app.use(useragent.express());
+
 // deal with all the links should be sent to the backend
 app.use('/api/v1', restRouter);
 
