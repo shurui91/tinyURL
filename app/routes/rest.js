@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
 var urlService = require('../services/urlService');
+var statsService = require('../services/statesService');
 
 router.post('/urls', jsonParser, function(req, res) {
 	var longUrl = req.body.longUrl;
@@ -21,6 +22,14 @@ router.get('/urls/:shortUrl', function(req, res) {
 		} else {
 			res.status(404).send('what??');
 		}
+	});
+});
+
+router.get('/urls/:shortUrl/:info', function(req, res) {
+	statsService.getUrlInfo(req.params.shortUrl, req.params.info, function(
+		data
+	) {
+		res.json(data);
 	});
 });
 
