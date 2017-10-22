@@ -1,18 +1,23 @@
+var path = require('path');
 var express = require('express');
 var router = express.Router();
 var urlService = require('../services/urlService');
 var statsService = require('../services/statsService');
-var path = require('path');
 
 router.get('*', function(req, res) {
-	// slice(1) removes the starting slash
 	var shortUrl = req.originalUrl.slice(1);
-	urlService.getLongUrl(shortUrl, function(url) {
+	var longUrl = urlService.getLongUrl(shortUrl, function(url) {
+		console.log('redirect.js after getLongUrl ' + shortUrl);
+		console.log('redirect.js after url ' + url);
 		if (url) {
+			console.log('redirect.js router.get * ' + url);
+			console.log('redirect.js long Url = ' + url['longUrl']);
 			res.redirect(url.longUrl);
 			statsService.logRequest(shortUrl, req);
 		} else {
-			res.sendFile(path.join(__dirname, '../public/views', '404.html'));
+			res.sendFile('404.html', {
+				root: path.join(__dirname + '/../public/views')
+			});
 		}
 	});
 });

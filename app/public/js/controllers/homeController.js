@@ -10,9 +10,8 @@ app.controller('homeController', [
 				.post('/api/v1/urls', {
 					longUrl: $scope.longUrl
 				})
-				.then(function(response) {
-					// console.log(response.data.shortUrl);
-					$location.path('/urls/' + response.data.shortUrl);
+				.success(function(data) {
+					$location.path('/urls/' + data.shortUrl);
 				});
 		};
 	}

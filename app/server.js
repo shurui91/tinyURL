@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
-var apiRouter = require('./routes/api');
-var redirectRouter = require('./routes/redirect');
-var indexRouter = require('./routes/index');
 var restRouter = require('./routes/rest');
+var indexRouter = require('./routes/index');
+var redirectRouter = require('./routes/redirect');
 var mongoose = require('mongoose');
 var useragent = require('express-useragent');
 
@@ -11,6 +10,8 @@ mongoose.connect('mongodb://user:user@ds125060.mlab.com:25060/tinyurl');
 
 // app.longToShortHash = {};
 // app.shortToLongHash = {};
+
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.use('/public', express.static(__dirname + '/public'));
 
