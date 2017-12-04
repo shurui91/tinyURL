@@ -130,9 +130,9 @@ var convertTo62 = function(num) {
 		num = Math.floor(num / 62);
 	} while (num);
 
-	console.log('convertTo62:  result = ' + result);
+	console.log('convertTo62: result = ' + result);
 
-	console.log('convertTo62:  num = ' + num);
+	console.log('convertTo62: num = ' + num);
 
 	return result;
 };
@@ -140,17 +140,14 @@ var convertTo62 = function(num) {
 var generateShortUrl = function(callback) {
 	urlModel.find({}, function(err, urls) {
 		console.log(
-			'generateShortUrl:  urls = ' +
-				urls +
-				'    len of urls = ' +
-				urls.length
+			'generateShortUrl: urls = ' + urls + ' len of urls = ' + urls.length
 		);
 		callback(convertTo62(urls.length));
 	});
 };
 
 var getLongUrl = function(shortUrl, callback) {
-	console.log('getLongUrl    shortUrl url = ' + shortUrl);
+	console.log('getLongUrl shortUrl url = ' + shortUrl);
 
 	redisClient.get(shortUrl, function(err, longUrl) {
 		if (longUrl) {
@@ -162,7 +159,7 @@ var getLongUrl = function(shortUrl, callback) {
 			});
 		} else {
 			urlModel.findOne({ shortUrl: shortUrl }, function(err, url) {
-				console.log('getLongUrl    long url = ' + url);
+				console.log('getLongUrl long url = ' + url);
 				//callback(url);
 
 				if (url) {
