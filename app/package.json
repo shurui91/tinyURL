@@ -23,7 +23,7 @@
     "express": "^4.16.2",
     "express-useragent": "^1.0.8",
     "geoip-lite": "^1.2.1",
-    "mongoose": "^4.12.3",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.12.1",
     "redis": "^2.8.0"
   },
