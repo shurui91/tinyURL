@@ -25,7 +25,7 @@
     "geoip-lite": "^1.2.1",
     "mongoose": "^4.12.3",
     "nodemon": "^1.12.1",
-    "redis": "^2.8.0"
+    "redis": "^3.1.1"
   },
   "devDependencies": {}
 }
