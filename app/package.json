@@ -22,9 +22,9 @@
     "body-parser": "^1.20.4",
     "express": "^4.22.1",
     "express-useragent": "^1.0.8",
-    "geoip-lite": "^1.2.1",
+    "geoip-lite": "^1.4.10",
     "mongoose": "^4.12.3",
-    "nodemon": "^1.12.1",
+    "nodemon": "^3.1.14",
     "redis": "^2.8.0"
   },
   "devDependencies": {}
